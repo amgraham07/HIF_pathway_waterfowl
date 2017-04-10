@@ -1,0 +1,25 @@
+#!/bin/bash
+
+for fn in ./*_1_clip.fastq
+do
+
+# get the path to the file
+dir=`dirname $fn`;
+
+# get just the file (without the path)
+base=`basename $fn`;
+
+# the read filename, without the *1_clip_sorted.fastq suffix
+rf=${base%_1_clip.fastq};
+
+# Do whatever we want with it
+echo ">>>>>>>>>>Running Perl Script to Remove Orphans<<<<<<<<<<<<<"
+perl remove_orphans_pe.pl ${dir}/${rf}_1_clip.fastq ${dir}/${rf}_2_clip.fastq
+echo ">>>>>>>>>>Running BWA-MEM<<<<<<<<<<<<<"
+bwa mem HIF_reference.fasta ${dir}/${rf}_1_clip_sorted.fastq ${dir}/${rf}_2_clip_sorted.fastq > ${rf}.sam
+echo ">>>>>>>>>>Running SAMTOOLS<<<<<<<<<<<<<"
+samtools view -bS ${rf}.sam > ${rf}.bam
+echo ">>>>>>>>>>Running SAMTOOLS SORT<<<<<<<<<<<<<"
+samtools sort ${rf}.bam > ${rf}.sorted.bam
+
+done

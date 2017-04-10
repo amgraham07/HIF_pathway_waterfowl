@@ -1,0 +1,23 @@
+#!/bin/bash
+
+for fn in ./*_1.fastq
+do
+
+# get the path to the file
+dir=`dirname $fn`;
+
+# get just the file (without the path)
+base=`basename $fn`;
+
+# the read filename, without the *_1.fastq suffix
+rf=${base%._1.fastq};
+
+# Do whatever we want with it
+echo ">>>>>>>>>>FASTX Toolkit Trimmer<<<<<<<<<<<<<"
+fastx_clipper -a AGATCGGAAGAGC -l 10 -n -v -i ${dir}/${rf}_1.fastq -o ${dir}/${rf}_1_trim.fastq
+fastx_clipper -a AGATCGGAAGAGC -l 10 -n -v -i ${dir}/${rf}_2.fastq -o ${dir}/${rf}_2_trim.fastq
+echo ">>>>>>>>>>FASTX Toolkit Quality Filter<<<<<<<<<<<<<"
+fastq_quality_filter -v -q 20 -p 90 -i ${dir}/${rf}_1_trim.fastq -o ${dir}/${rf}_1_filter.fastq
+fastq_quality_filter -v -q 20 -p 90 -i ${dir}/${rf}_2_trim.fastq -o ${dir}/${rf}_2_filter.fastq
+
+done

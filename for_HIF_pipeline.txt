@@ -1,0 +1,31 @@
+ALLIE M. GRAHAM - McCracken Lab - University of Miami
+PROTOCOL FOR HIF GENE PROJECT - PER SPECIES (BOTH POPULATIONS)
+Assistance provided by the Michigan State University NGS Workshop 2016
+
+#load modules on chinook ARSC server
+module load SAMtools/1.3.1-pic-iomkl-2016a
+module load BWA/0.7.15-pic-iomkl-2016a
+module load BamTools/2.4.0-pic-iomkl-2016a
+module load BCFtools/1.3.1-pic-iomkl-2016a
+module load bio/VCFtools/0.1.14-pic-iomkl-2016a-Perl-5.22.1
+module load Perl/5.22.1-pic-iomkl-2016a
+
+#trim and filter raw reads
+see loop file (for_loop_trim_filter.sh or for_loop_trim_filter.txt)
+
+#index reference sequences/genome
+bwa index HIF_reference.fasta
+samtools faidx HIF_reference.fasta
+
+#mapping the raw reads to the reference sequences/genome (all individual)
+see loop file (called for_loop_HIF.sh or for_loop_HIF.txt)
+
+#merge and mpileup file with ALL individuals (high/low) into one file
+
+example:
+samtools mpileup -uf HIF_reference.fasta xxxx.sorted.bam .... [all other 19 individual files] | bcftools call -vmO z -o output_file_name.vcf
+
+actual: 
+samtools mpileup -uf HIF_reference.fasta REW081_Low_CT.sorted.bam REW193_Low_CT.sorted.bam REW200_Low_CT.sorted.bam REW203_Low_CT.sorted.bam REW206_Low_CT.sorted.bam REW207_Low_CT.sorted.bam REW235_Low_CT.sorted.bam REW301_Low_CT.sorted.bam REW305_Low_CT.sorted.bam REW316_Low_CT.sorted.bam KGM486_High_CT.sorted.bam KGM527_High_CT.sorted.bam KGM533_High_CT.sorted.bam REW238_High_CT.sorted.bam REW253_High_CT.sorted.bam KGM255_High_CT.sorted.bam REW259_High_CT.sorted.bam REW269_High_CT.sorted.bam REW272_High_CT.sorted.bam REW286_High_CT.sorted.bam | bcftools call -vmO z -o cinnamon_teal_HIF.vcf
+samtools mpileup -uf HIF_reference.fasta KGM267_Low_ST.sorted.bam KGM275_Low_ST.sorted.bam KGM285_Low_ST.sorted.bam KGM319_Low_ST.sorted.bam KGM699_Low_ST.sorted.bam KGM727_Low_ST.sorted.bam KGM735_Low_ST.sorted.bam KGM747_Low_ST.sorted.bam KGM778_Low_ST.sorted.bam KGM790_Low_ST.sorted.bam KGM437_High_ST.sorted.bam KGM449_High_ST.sorted.bam KGM484_High_ST.sorted.bam KGM502_High_ST.sorted.bam KGM543_High_ST.sorted.bam REW092_High_ST.sorted.bam REW132_High_ST.sorted.bam REW219_High_ST.sorted.bam REW237_High_ST.sorted.bam KGM1129_High_ST.sorted.bam | bcftools call -vmO z -o speckled_teal_HIF.vcf
+samtools mpileup -uf HIF_reference.fasta KGM274_Low_YBP.sorted.bam KGM306_Low_YBP.sorted.bam KGM309_Low_YBP.sorted.bam KGM324_Low_YBP.sorted.bam KGM714_Low_YBP.sorted.bam KGM731_Low_YBP.sorted.bam KGM733_Low_YBP.sorted.bam KGM742_Low_YBP.sorted.bam KGM765_Low_YBP.sorted.bam KGM780_Low_YBP.sorted.bam KGM425_High_YBP.sorted.bam KGM491_High_YBP.sorted.bam KGM507_High_YBP.sorted.bam KGM551_High_YBP.sorted.bam KGM567_High_YBP.sorted.bam REW112_High_YBP.sorted.bam REW144_High_YBP.sorted.bam REW247_High_YBP.sorted.bam REW251_High_YBP.sorted.bam KGM1076_High_YBP.sorted.bam | bcftools call -vmO z -o yellow_billed_pintail_HIF.vcf
