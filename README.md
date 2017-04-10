@@ -1,7 +1,7 @@
 # HIF_pathway_waterfowl
 ### This is the repository for the scripts used in my dissertation and a forthcoming manuscript
 
-#### content of this repository includes...
+#### *Content of this repository includes...*
 
 ##### (1) for_loop_pipeline.txt - an explanatory list of the steps taken in the project 
 ##### (2) for_loop_trim_filter.txt - a script written for trimming and filtering the raw illumina sequence used
