@@ -1,4 +1,4 @@
-# HIF_pathway_waterfowl
+# HIF_pathway_waterfowl (Accepted at Heredity)
 ### This is the repository for the scripts used in my dissertation and a forthcoming manuscript
 
 #### *Content of this repository includes...*
