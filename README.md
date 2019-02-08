@@ -1,5 +1,6 @@
-# HIF_pathway_waterfowl (Accepted at Heredity)
-### This is the repository for the scripts used in my dissertation and a forthcoming manuscript
+# HIF_pathway_waterfowl
+### This is the repository for the scripts used in my dissertation and manuscripts 
+#### including (Graham & McCracken, 2019, Heredity - https://doi.org/10.1038/s41437-018-0173-z)
 
 #### *Content of this repository includes...*
 
