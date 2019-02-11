@@ -12,4 +12,4 @@
  
  *NOTE* - The VCF outputs will show up as .vcf files, but are *secretly* zipped files, so you will have to re-lable as a .zip file and upzip them
  
- ##### (6) vcf_consensus_and_collapse - for ABBA-BABA analyses; a script that preps VCF files for consensus mapping back to a reference (vcf-tools), and then collapses them into an artificially concatenated single string (grep, awk); specifically used for RAD-seq data.
+ ##### (6) bcf_consensus_and_collapse - for ABBA-BABA analyses; a script that preps VCF files for consensus mapping back to a reference (bcftools), and then collapses them into an artificially concatenated single string (grep, awk); specifically used for RAD-seq data.
