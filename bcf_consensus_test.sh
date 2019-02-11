@@ -9,7 +9,7 @@ dir=`dirname $fn`;
 # get just the file (without the path)
 base=`basename $fn`;
 
-# the read filename, without the *_RAD_ST_H.vcf suffix
+# the read filename, without the *_RAD_ST_H.vcf suffix, this is effectively the sample ID
 rf=${base%_RAD_ST_H.vcf};
 
 # Do whatever we want
