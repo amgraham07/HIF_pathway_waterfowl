@@ -16,7 +16,7 @@ rf=${base%_RAD_ST_H.vcf};
 echo ">>>>>>>>>>bzip and taabix<<<<<<<<<<<<<"
 bgzip ${dir}/${rf}_RAD_ST_H.vcf
 tabix -p vcf ${dir}/${rf}_RAD_ST_H.vcf.gz
-echo ">>>>>>>>>>vcf consensus<<<<<<<<<<<<<"
+echo ">>>>>>>>>>bcftools consensus<<<<<<<<<<<<<"
 cat RAD_REF_overlap.fasta | bcftools consensus --iupac-codes --sample ${rf} ${rf}_RAD_ST_H.vcf.gz > ${rf}_RAD_ST_H_consensus_out.fasta
 echo ">>>>>>>>>>collapsing<<<<<<<<<<<<<"
 grep -v "^>" ${dir}/${rf}_RAD_ST_H_consensus_out.fasta | awk 'BEGIN { ORS=""; print ">collapsed RAD\n" } { print }' > ${rf}_RAD_ST_H_consensus_collapsed.fasta
